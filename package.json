@@ -1,0 +1,86 @@
+{
+  "name": "pqc32",
+  "version": "1.0.0",
+  "description": "Post-Quantum HD Wallet Derivation for SLH-DSA (FIPS 205). BIP-32 analog using SHAKE-256.",
+  "type": "commonjs",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    },
+    "./params": {
+      "import": {
+        "types": "./dist/esm/params.d.ts",
+        "default": "./dist/esm/params.js"
+      },
+      "require": {
+        "types": "./dist/cjs/params.d.ts",
+        "default": "./dist/cjs/params.js"
+      }
+    },
+    "./types": {
+      "import": {
+        "types": "./dist/esm/types.d.ts",
+        "default": "./dist/esm/types.js"
+      },
+      "require": {
+        "types": "./dist/cjs/types.d.ts",
+        "default": "./dist/cjs/types.js"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "!dist/**/*.map"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json && echo '{\"type\":\"module\"}' > dist/esm/package.json",
+    "build": "npm run clean && npm run build:cjs && npm run build:esm",
+    "test": "ts-node test/pqc32.test.ts",
+    "prepublishOnly": "npm run build && npm test",
+    "lint": "tsc --noEmit"
+  },
+  "keywords": [
+    "bitcoin",
+    "post-quantum",
+    "slh-dsa",
+    "sphincs",
+    "fips-205",
+    "hd-wallet",
+    "bip-32",
+    "bip-360",
+    "shake-256",
+    "pqc",
+    "quantum-resistant",
+    "deterministic",
+    "key-derivation"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "bip39": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nickcash/pqc32"
+  }
+}
